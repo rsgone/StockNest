@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">StockNest</string>
+    <string name="title_activity_main">StockNest</string>
+    <string name="package_name">com.rajesh.stocknest</string>
+    <string name="custom_url_scheme">com.rajesh.stocknest</string>
+</resources>

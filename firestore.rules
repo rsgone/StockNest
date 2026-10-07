@@ -1,0 +1,43 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /households/{householdId} {
+      allow get: if request.auth != null;
+      allow list: if false;
+
+      allow create: if request.auth != null
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.members.keys().hasOnly([request.auth.uid]);
+
+      // Any signed-in device can join (add itself) since the household code
+      // itself is the shared secret; joining only ever touches the members
+      // map, never other fields. This also covers a device rejoining under a
+      // name that already exists in the household (e.g. reinstalling the
+      // app) — the client replaces the old entry with a new one under the
+      // new uid, which requires touching a second, non-caller key. The UI
+      // still restricts the manual "remove member" action to the owner only;
+      // this rule matches the same full-trust level already granted to any
+      // code holder on items/history.
+      allow update: if request.auth != null
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['members']);
+
+      match /items/{itemId} {
+        allow read, write: if request.auth != null
+          && request.auth.uid in get(/databases/$(database)/documents/households/$(householdId)).data.members;
+      }
+
+      match /history/{entryId} {
+        allow read, create: if request.auth != null
+          && request.auth.uid in get(/databases/$(database)/documents/households/$(householdId)).data.members;
+        // History is otherwise immutable; the one exception is the owner
+        // reassigning "updatedBy" on entries left by a member they just
+        // removed, and only that one field.
+        allow update: if request.auth != null
+          && get(/databases/$(database)/documents/households/$(householdId)).data.ownerUid == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['updatedBy']);
+        allow delete: if false;
+      }
+    }
+  }
+}

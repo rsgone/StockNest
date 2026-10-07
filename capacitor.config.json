@@ -1,0 +1,13 @@
+{
+  "appId": "com.rajesh.stocknest",
+  "appName": "StockNest",
+  "webDir": "dist",
+  "backgroundColor": "#f2f9f1",
+  "plugins": {
+    "StatusBar": {
+      "overlaysWebView": false,
+      "style": "LIGHT",
+      "backgroundColor": "#f2f9f1"
+    }
+  }
+}

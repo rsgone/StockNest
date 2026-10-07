@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>StockNest</title>
+    <script>
+      // iOS can't install the Android APK, so send it straight to the
+      // hosted web app instead of showing the Android install page.
+      (function () {
+        var ua = navigator.userAgent || navigator.vendor || ''
+        var isIphoneOrIpod = /iPhone|iPod/.test(ua)
+        var isIpad = /iPad/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+        if (isIphoneOrIpod || isIpad) {
+          window.location.replace('/app')
+        }
+      })()
+    </script>
+    <style>
+      :root {
+        --green-900: #1b5e20;
+        --green-700: #2e7d32;
+        --green-100: #e5f3e6;
+        --green-50: #f2f9f1;
+        --ink-900: #1a1f1c;
+        --ink-600: #4a534d;
+        --ink-400: #7c877f;
+        --line: #e4ece2;
+        --radius-lg: 20px;
+        --radius-md: 14px;
+        --shadow: 0 2px 10px rgba(27, 94, 32, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--green-50);
+        color: var(--ink-900);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+      }
+
+      .icon {
+        width: 112px;
+        height: 112px;
+        border-radius: 26px;
+        box-shadow: var(--shadow);
+        margin-bottom: 18px;
+      }
+
+      h1 {
+        font-size: 26px;
+        margin: 0 0 8px;
+        color: var(--green-900);
+      }
+
+      .tagline {
+        font-size: 15px;
+        color: var(--ink-600);
+        line-height: 1.5;
+        margin: 0 0 28px;
+      }
+
+      .install-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 16px;
+        border-radius: var(--radius-md);
+        background: var(--green-700);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+      }
+
+      .install-btn:active {
+        background: var(--green-900);
+      }
+
+      .hint {
+        font-size: 12.5px;
+        color: var(--ink-400);
+        line-height: 1.5;
+        margin: 14px 0 0;
+      }
+
+      .hint a {
+        color: var(--green-700);
+        font-weight: 600;
+      }
+
+      .features {
+        text-align: left;
+        background: #fff;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow);
+        padding: 18px 20px;
+        margin-top: 28px;
+        list-style: none;
+      }
+
+      .features li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--ink-600);
+        padding: 8px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .features li:last-child {
+        border-bottom: none;
+      }
+
+      .features .emoji {
+        font-size: 18px;
+      }
+
+      footer {
+        margin-top: 28px;
+        font-size: 12.5px;
+        color: var(--ink-400);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <img class="icon" src="/icon.png" alt="StockNest" />
+        <h1>StockNest</h1>
+        <p class="tagline">
+          Track your household's grocery stock together, get low-stock alerts,
+          and never run out again.
+        </p>
+
+        <a
+          class="install-btn"
+          href="https://drive.google.com/uc?export=download&id=12j3xu8BLEuPxf-P9ru1lXjDO3W1jaSd9"
+        >⬇ Install on Android</a>
+        <p class="hint">
+          This downloads the app file (.apk) directly. Android may ask
+          permission to install from this source the first time — that's
+          expected for apps outside the Play Store, just tap Allow.
+          <br />
+          <br />
+          On iPhone/iPad? <a href="/app">Open the web app instead</a>.
+        </p>
+
+        <ul class="features">
+          <li><span class="emoji">🏠</span> Shared household inventory, updated by everyone in real time</li>
+          <li><span class="emoji">🔴</span> Items turn red automatically when stock runs low</li>
+          <li><span class="emoji">🛍️</span> Auto-built shopping list from what's low</li>
+          <li><span class="emoji">🌐</span> Works in English, हिंदी, తెలుగు and ગુજરાતી</li>
+        </ul>
+
+        <footer>A simple household inventory app for a better everyday.</footer>
+      </div>
+    </div>
+  </body>
+</html>
