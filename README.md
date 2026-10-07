@@ -40,8 +40,8 @@ home wifi) because data lives in Firebase, not on one device.
 
 - The **first person** to open the app enters their name and taps **Create
   New Household**, which generates a short code (e.g. `AB3D-9FKX`).
-- The **second person** (your wife) opens the app on her own device, enters
-  her name, and taps **Join with a Code**, using that code.
+- The **second person** opens the app on their own device, enters their name,
+  and taps **Join with a Code**, using that code.
 - From then on, both devices read/write the same Firestore data in
   real time — no accounts or passwords, just the household code.
 - Each item stores its own unit (kg/g for weight, L/ml for volume, pcs for
@@ -50,6 +50,38 @@ home wifi) because data lives in Firebase, not on one device.
 - The Settings screen shows the household code again any time you need to
   reshare it (e.g. new phone), and lets you rename yourself or leave/switch
   households.
+
+---
+
+## Screenshots
+
+<table>
+  <tr>
+    <td><img src="screenshots/home.png" width="180"/><br/><sub>Home</sub></td>
+    <td><img src="screenshots/add-item.png" width="180"/><br/><sub>Add Item</sub></td>
+    <td><img src="screenshots/save-item.png" width="180"/><br/><sub>Save Item</sub></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/shopping-list.png" width="180"/><br/><sub>Shopping List</sub></td>
+    <td><img src="screenshots/history.png" width="180"/><br/><sub>History</sub></td>
+    <td><img src="screenshots/settings.png" width="180"/><br/><sub>Settings</sub></td>
+  </tr>
+</table>
+
+---
+
+## Prerequisites
+
+- **Node.js** v18 or later — [download here](https://nodejs.org/)
+- **npm** v9 or later (comes with Node.js)
+- A free [Firebase](https://firebase.google.com/) account
+
+Check your versions:
+
+```
+node -v
+npm -v
+```
 
 ---
 
@@ -88,16 +120,24 @@ npx firebase-tools use --add   # pick your project, alias it "default"
 npx firebase-tools deploy --only firestore:rules
 ```
 
-## 4. Run it locally
+## 4. Install dependencies
+
+> **Note:** This project uses Vite 8 which has a known npm optional-dependency
+> bug on some systems. Use `--legacy-peer-deps` to avoid peer conflict errors.
 
 ```
-npm install
+npm install --legacy-peer-deps
+```
+
+## 5. Run it locally
+
+```
 npm run dev
 ```
 
-Open the printed `localhost` URL. This only works on your own machine/wifi.
+Open the printed `localhost` URL in your browser. This only works on your own machine/wifi.
 
-## 5. Make it reachable from outside your home wifi
+## 6. Make it reachable from outside your home wifi
 
 Firebase Hosting gives you a free public URL backed by the same Firestore
 data, so both of you can open it from anywhere:
